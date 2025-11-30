@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大学生ポートフォリオ | [あなたの名前]</title>
+    <style>
+        /* === グローバル設定・リセット === */
+        :root {
+            --main-color: #007bff; /* メインカラー（青） */
+            --text-color: #333;
+            --background-color: #f8f9fa; /* 背景色（薄いグレー） */
+            --white: #ffffff;
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            color: var(--text-color);
+            background-color: var(--background-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* === レイアウト === */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* === ヘッダー（ナビゲーション） === */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--main-color);
+            text-decoration: none;
+        }
+
+        .nav-links li {
+            display: inline-block;
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--main-color);
+        }
+
+        /* === ヒーローセクション（ファーストビュー） === */
+        .hero {
+            background: linear-gradient(135deg, var(--white) 0%, #e9ecef 100%);
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #6c757d;
+        }
+
+        /* === 共通セクションスタイル === */
+        section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            position: relative;
+            color: var(--main-color);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--main-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* === 自己紹介セクション === */
+        .profile-content {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .profile-text {
+            flex: 2;
+        }
+
+        .profile-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-color);
+            border-left: 4px solid var(--main-color);
+            padding-left: 10px;
+        }
+
+        .profile-text p {
+            margin-bottom: 20px;
+        }
+
+        .gakuchika-box {
+            background-color: var(--white);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border-top: 5px solid var(--main-color);
+        }
+
+        .gakuchika-box strong {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+            color: var(--main-color);
+        }
+
+        /* === スキルセクション === */
+        #skills {
+            background-color: var(--white);
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background: var(--background-color);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--main-color);
+        }
+
+        /* === プロジェクトセクション === */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: scale(1.02);
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .project-info a {
+            color: var(--main-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        /* === フッター === */
+        footer {
+            background: #343a40;
+            color: var(--white);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--main-color);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        /* === レスポンシブ対応 === */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .profile-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <a href="#hero" class="logo">[あなたの名前]</a>
+            <ul class="nav-links">
+                <li><a href="#about">自己紹介</a></li>
+                <li><a href="#skills">スキル</a></li>
+                <li><a href="#projects">プロジェクト</a></li>
+                <li><a href="#contact">コンタクト</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section id="hero" class="hero">
+        <div class="container">
+            <h1>[あなたの名前]</h1>
+            <p>[専攻] 大学生 | ポートフォリオ</p>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">自己紹介</h2>
+            <div class="profile-content">
+                <div class="profile-text">
+                    <p>
+                        [大学名] [学部・学科]の[あなたの名前]です。
+                        私は主に[興味のある分野や専攻、例：Webデザイン、プログラミング、マーケティング]に強い関心を持ち、大学での学びを深めています。
+                        座学だけでなく、実務的な経験や課題解決を通じた成長を重視しており、常に新しい挑戦を求めています。
+                    </p>
+                    <div class="gakuchika-box">
+                        <h3>🎓 学生時代に力を入れたこと（ガクチカ）</h3>
+                        <p>
+                            コンビニエンスストアでのアルバイトを通じ、**課題解決能力**を培いました。
+                        </p>
+                        <strong>状況・課題:</strong>
+                        <p>
+                            店舗では日配品の廃棄量が平均25kgと多く、大きな損失が常態化していました。私はこの廃棄ロスを削減する必要性を痛感しました。
+                        </p>
+                        <strong>行動:</strong>
+                        <p>
+                            廃棄が近い商品を見極め、発注担当者と協力し、**夕方以降に段階的に値引き販売する施策**を提案・実行しました。特に売れ筋の時間帯に合わせて割引率を調整し、顧客への訴求力を高めました。
+                        </p>
+                        <strong>結果:</strong>
+                        <p>
+                            この取り組みの結果、日配品の廃棄量を平均**10～15kgに抑える**ことに成功し、約**40%～60%の削減**を達成しました。
+                        </p>
+                        <strong>学び:</strong>
+                        <p>
+                            この経験から、現状の問題を分析し、**具体的な数字に基づいて解決策を考案**し、実行に移す**課題解決力**が身につきました。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">スキル</h2>
+            <div class="skill-grid">
+                <div class="skill-card">
+                    <h4>Web技術 (フロントエンド)</h4>
+                    <p>HTML5, CSS3, JavaScriptの基本的な知識と、モダンなレスポンシブデザインの実装経験。</p>
+                </div>
+                <div class="skill-card">
+                    <h4>プログラミング/ツール</h4>
+                    <p>[例：Python, Excel]を用いたデータ分析や簡単な業務効率化ツールの作成。</p>
+                </div>
+                <div class="skill-card">
+                    <h4>デザイン/企画</h4>
+                    <p>[例：Photoshop, Figma]を使ったワイヤーフレーム作成、UI/UXの基本理解。</p>
+                </div>
+                <div class="skill-card">
+                    <h4>語学・その他</h4>
+                    <p>[例：TOEIC 700点, チームでのプロジェクト推進力, 課題設定能力]。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">プロジェクト・制作物</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-info">
+                        <h4>個人ブログ/Webサイト制作</h4>
+                        <p>
+                            [使用技術：HTML/CSS/JavaScript]。
+                            ゼロから設計・コーディングした個人ブログサイト。清潔感のあるデザインを意識し、レスポンシブ対応も実装。
+                        </p>
+                        <a href="#">詳細を見る &rarr;</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-info">
+                        <h4>グループ開発プロジェクト</h4>
+                        <p>
+                            [使用技術：Python/Django]。
+                            大学の授業で、チームで開発した簡易的なタスク管理Webアプリケーションのバックエンドを担当。
+                        </p>
+                        <a href="#">詳細を見る &rarr;</a>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-info">
+                        <h4>データ分析による提案</h4>
+                        <p>
+                            [使用技術：Excel/PowerPoint]。
+                            地域ボランティア団体に対し、データ分析に基づいたイベント集客改善の提案を実施。
+                        </p>
+                        <a href="#">詳細を見る &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <section id="contact" class="contact">
+        <div class="container" style="text-align: center;">
+            <h2 class="section-title">コンタクト</h2>
+            <p>
+                ご興味をお持ちいただけましたら、お気軽にご連絡ください。
+                以下のメールアドレスまたは外部アカウントからお願いします。
+            </p>
+            <p style="font-size: 1.2rem; font-weight: 600; margin: 20px 0;">
+                <a href="mailto:your.email@example.com" style="color: var(--main-color); text-decoration: none;">your.email@example.com</a>
+            </p>
+            <p>
+                [LinkedInやGitHubなどのリンク]
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            &copy; 2024 [あなたの名前] Portfolio
+        </div>
+    </footer>
+
+</body>
+</html>
